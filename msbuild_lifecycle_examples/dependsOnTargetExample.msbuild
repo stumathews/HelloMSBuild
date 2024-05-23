@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmls="https//schemas.micorsoft.com/develop/msbuild/2003">
+  
+  <Target Name="TargetA" DependsOnTargets="TargetB">
+    <Message Text="This is target A"/>
+  </Target>
+  
+   <Target Name="TargetB">
+    <Message Text="This is target B"/>
+  </Target>
+  
+   <Target Name="TargetC">
+    <Message Text="This is target C"/>
+  </Target>
+  
+</Project>

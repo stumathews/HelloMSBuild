@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Goodbye" xmls="https//schemas.micorsoft.com/develop/msbuild/2003">
+<!-- Sample MSBuild project file -->
+  
+  <!-- Properties store data into memory like a variable. They must be declared within a PropertyGroup -->
+  
+  <PropertyGroup>
+    <!-- Can also override this as a parameter on the cmdline: msbuild.exe dosomething.msbuild @args.rsp /p:Jenny-->
+    <!-- Setup a property called Name -->
+    <Name>Stuart</Name>
+    
+    <!-- Setup a property called Fullname, which is composed of Name -->
+    <Fullname>$(Name) Robert Charles Mathews</Fullname>
+  
+    <!-- -->
+    <Exes>c:\*.exe</Exes>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <!-- An item allosw you to store/Inlcude an evaluation of expression, which could be a list of items, such as the files returned by the property when it is evaluated-->
+    <Pics Include="$(Exes)" /> <!-- This still store an array of file types into the Item -->
+  </ItemGroup>
+  
+  <ItemGroup>
+    <!-- You can also make your own Items -->
+    <Family Include="Bruce">
+      <Role>Dad</Role>
+    </Family>
+    <Family Include="Jenny">
+      <Role>Mom</Role>
+    </Family>
+    <Family Include="Stuart">
+      <Role>Son</Role>
+    </Family>
+  </ItemGroup>
+  
+  <!-- call with msbuild dosomething.msbuild /t:ListFamily-->
+  <Target Name="ListFamily">
+    <Message Text="@(Family)"/>
+    <Message Text="@(Family->'%(Role)')"/>
+  </Target>
+  
+  <!-- First target is normally only run, despite there being multiple targets defined in the project file -->
+  <Target Name="HelloWorld">
+    <!-- A target is a container for instructions that we'll add later.
+    It is also the highest level of organisational components we have in msbuild -->   
+    
+    <!-- Invoke a Message task -->
+    <Message Text="Hello $(Fullname)!"/>  
+  </Target>
+
+  <Target Name="Goodbye">
+    <!-- Can run this target explicitly via msbuild.exe dosomething.msbuild /target:Goodbye-->
+    <Message Text="GoodBye, cruel world!"/> <!-- Note: we've pulled in the Peoperty using string interpolation -->
+  </Target>
+
+  <Target Name="ReservedProperties">
+    <!-- Reference a reserved property. See MSDN MsBuild Reserved Properties-->
+    <Message Text="MSBuildProjectDirectory: $(MSBuildProjectDirectory)" />
+  </Target>
+
+  <Target Name="ListPics">
+    <!-- When we reference and Item, we reference it with an @ sign: -->
+    <Message Text="@(Pics)"/>
+    <Message Text="@(Pics->'%(ModifiedTime)')"/> <!-- We can inspect the meta data for each entry in the Item-->
+  </Target>
+</Project>
+
