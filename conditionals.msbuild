@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmls="https//schemas.micorsoft.com/develop/msbuild/2003">
+    
+  <PropertyGroup>
+    <DoIt>true</DoIt>
+  </PropertyGroup>
+  
+   <PropertyGroup>
+    <MyName>Bruce</MyName>
+  </PropertyGroup>
+  
+  <Target Name="TargetA" DependsOnTargets="TargetC" Condition="$(MyName) == 'Bruce'">
+    <Message Text="This is target A"/>
+  </Target>
+  
+   <Target Name="TargetB">
+    <Message Text="This is target B"/>
+  </Target>
+  
+  <!-- Add a condtion on running Target C-->
+   <Target Name="TargetC" Condition="$(DoIt)"> <!-- inspect the value of property DoIt -->
+    <Message Text="This is target C"/>
+  </Target>
+  
+</Project>
