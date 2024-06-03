@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmls="https//schemas.micorsoft.com/develop/msbuild/2003">
+
+	<PropertyGroup>
+		<First>Stuart</First>
+		<Last>Mathews</Last>
+		<Fullname>$(First) $(Last)</Fullname>
+	</PropertyGroup>
+  
+  <PropertyGroup>
+    <AppName>MyApp</AppName>
+    <ProjectDir>..\MyApp</ProjectDir>
+    <SolutionFileName>$(ProjectDir)\$(AppName).sln</SolutionFileName>
+    <OutputPath>c:\temp</OutputPath>
+    <DeployDir>$(OutputPath)\deploy</DeployDir>
+  </PropertyGroup>
+  
+</Project>
